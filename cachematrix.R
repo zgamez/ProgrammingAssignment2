@@ -4,8 +4,8 @@
 makeCacheMatrix <- function(x = numeric()) {
     m <- NULL
     set <- function(y) {
-        x <<- y                         # x in the containing environment is initialized
-        m <<- NULL                      # m in the containing environment is initialized
+        x <<- y                         # x is superassigned in global and initialized
+        m <<- NULL                      # m is superassigned in global and initialized
     }
     get <- function() x
     setinverse <- function(inverse) m <<- inverse  
@@ -27,7 +27,7 @@ cacheSolve <- function(x, ...) {
         
     m <- x$getinverse()
     if(!is.null(m)) {
-        message("getting cached data")  # since local variable 'm' exists within global there is no need to search the containing
+        message("getting cached data")  # since local variable 'm' exists within global there searches value
         return(m)
     }
     
